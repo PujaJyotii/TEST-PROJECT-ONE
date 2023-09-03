@@ -1,20 +1,22 @@
 import React from "react";
+import UserItems from "./UserItems";
 
-const UserList = (props) => {
+const UserList = ({products, onDeleteProduct}) => {
+    const totalWorth = products.reduce((acc, product) => acc + product.price, 0);
 
     return (
-        <ul>
+        <div>
             <p>Product</p>
-            
-            {props.products.map(product => (
-             <li key={product.unique}>
-                {product.id} - {product.price} - {product.detail} {<button>Delete Product</button>}
-             </li>
+            <ul>
+            {products.map((product) => (
+              <UserItems key={product.id} product={product} onDeleteProduct={onDeleteProduct}/>
             ))}
-            
+            </ul>
+            <p>Total Worth: {totalWorth}</p>
  
-        </ul>
-    )
+        </div>
+        
+    );
 
 }
 
